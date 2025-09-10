@@ -1,0 +1,133 @@
+/* Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root{
+  --bg: #cf6161;         /* figma dagi fonga yaqin qizil */
+  --accent: #ffd400;     /* sariq */
+  --card-gap: 28px;
+  --card-radius: 12px;
+  --card-img-height: 200px; /* rasm balandligi (o'zgartiring agar kerak bo'lsa) */
+}
+
+/* Body */
+body{
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.4;
+}
+
+/* Page container */
+.page{
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 20px;
+}
+
+/* Top row: left logo, center title */
+.top-row{
+  display: grid;
+  grid-template-columns: 160px 1fr 160px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.logo{
+  color: #111;
+  opacity: 0.95;
+  font-weight: 600;
+  /* Logo small box look */
+  padding-left: 6px;
+}
+.spacer {}
+
+/* Header (center) */
+.hero { text-align: center; }
+.hero h1{
+  font-size: 44px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+.hero .accent{ color: var(--accent); }
+
+/* labels under header */
+.labels{
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 14px 0 20px 0;
+  color: #111;
+  opacity: 0.9;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Grid of cards */
+.grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--card-gap);
+  align-items: start;
+}
+
+/* Individual card */
+.card{
+  position: relative;
+  border-radius: var(--card-radius);
+  overflow: hidden;        /* IMPORTANT: makes image + info clip together (no black rim) */
+  background: transparent; /* top part is image, bottom is black block */
+  display: flex;
+  flex-direction: column;
+  min-height: calc(var(--card-img-height) + 120px); /* ensures consistent card height */
+}
+
+/* Media (image) */
+.media img{
+  display: block;
+  width: 100%;
+  height: var(--card-img-height);
+  object-fit: cover;
+  vertical-align: middle;
+  border: none;
+}
+
+/* Black info block glued to image bottom */
+.info{
+  background: #000;
+  color: #fff;
+  padding: 16px;
+  /* no margin between img and this block (they are sibling elements inside overflow:hidden) */
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+/* Titles inside black block */
+.info h2{
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #fff;
+  font-weight: 700;
+}
+.info p{
+  font-size: 13px;
+  color: #d6d6d6;
+  line-height: 1.35;
+}
+
+/* small responsive tweaks */
+@media (max-width: 1024px){
+  .grid{ grid-template-columns: repeat(2, 1fr); }
+  :root { --card-img-height: 180px; }
+}
+@media (max-width: 640px){
+  .grid{ grid-template-columns: 1fr; }
+  :root { --card-img-height: 220px; }
+  .hero h1{ font-size: 28px; }
+  .labels{ display: none; }
+  .top-row{ grid-template-columns: 1fr; text-align: left; gap: 8px; }
+}
